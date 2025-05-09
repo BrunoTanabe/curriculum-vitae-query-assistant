@@ -14,7 +14,10 @@ dependencies = [
     "djangorestframework>=3.16.0",
     "drf-spectacular>=0.28.0",
     "markdown>=3.8",
+    "mongoengine>=0.29.1",
     "pillow>=11.2.1",
+    "psycopg2-binary>=2.9.10",
+    "pypdf2>=3.0.1",
 ]
 
 [build-system]

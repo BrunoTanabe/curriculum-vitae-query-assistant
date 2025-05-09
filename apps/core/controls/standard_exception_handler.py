@@ -3,8 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 
-from apps.core.controls.standard_api_response import \
-    StandardApiResponse
+from apps.core.controls.standard_api_response import StandardApiResponse
 
 """
 The Method custom_api_exception.py.

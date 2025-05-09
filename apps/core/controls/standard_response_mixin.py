@@ -2,8 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from apps.core.controls.custom_api_exception import CustomAPIException
-from apps.core.controls.standard_api_response import \
-    StandardApiResponse
+from apps.core.controls.standard_api_response import StandardApiResponse
 
 """
 The Class standard_response_mixin.py.
@@ -41,7 +40,9 @@ class StandardResponseMixin:
             status_code = error_data.status_code
             error_data = error_data.detail
         else:
-            error_data = error_data
+            error_data = {
+                "error": error_data if error_data else "Ocorrreu um erro inesperado.",
+            }
 
         api_response = StandardApiResponse.error(
             error_data=error_data,
@@ -51,4 +52,3 @@ class StandardResponseMixin:
         )
 
         return Response(api_response.to_dict(), status=status_code)
-

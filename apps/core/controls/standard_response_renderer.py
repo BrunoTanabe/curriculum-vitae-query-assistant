@@ -1,8 +1,7 @@
 from rest_framework import status
 from rest_framework.renderers import JSONRenderer
 
-from apps.core.controls.standard_api_response import \
-    StandardApiResponse
+from apps.core.controls.standard_api_response import StandardApiResponse
 
 """
 The Renderer standard_response_renderer.py.
@@ -37,7 +36,7 @@ class StandardResponseRenderer(JSONRenderer):
             method = None
 
         if isinstance(data, dict) and all(
-                key in data for key in ["code", "status", "response", "path", "method"]
+            key in data for key in ["code", "status", "response", "path", "method"]
         ):
             standardized_data = data
         else:

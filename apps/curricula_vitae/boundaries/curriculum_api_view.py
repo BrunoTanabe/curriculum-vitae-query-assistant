@@ -1,16 +1,26 @@
-from apps.core.controls.standard_response_mixin import StandardResponseMixin
+from dependency_injector.wiring import Provide, inject
+from rest_framework import status
 from rest_framework.views import APIView
 
+from apps.core.controls.custom_api_exception import CustomAPIException
+from apps.core.controls.standard_response_mixin import StandardResponseMixin
+from apps.curricula_vitae.containers.curriculum_container import \
+    CurriculumContainer
+from apps.curricula_vitae.controls.curriculum_exception import \
+    PostCurriculumException
+from apps.curricula_vitae.entities.serializers.curriculum_create_input import \
+    CurriculumCreateInput
+
 """
-The View document_view.py.
-A view document_view.py é responsável por lidar com as requisições HTTP relacionadas aos documentos.
+The View curriculum_api_view.py.
+A view curriculum_api_view.py é responsável por lidar com as requisições HTTP relacionadas aos documentos.
 
 @Author Bruno Tanabe
 @CreatedAt 2025-05-07
 """
 
 
-class IdDocumentAPIView(StandardResponseMixin, APIView):
+class CurriculumAPIView(StandardResponseMixin, APIView):
 
     @inject
     @document_post
@@ -18,7 +28,7 @@ class IdDocumentAPIView(StandardResponseMixin, APIView):
         self,
         request,
         identification_document_service: IdDocumentService = Provide[
-            IdDocumentContainer.identification_document_service
+            CurriculumContainer.identification_document_service
         ],
     ):
         """
@@ -26,7 +36,7 @@ class IdDocumentAPIView(StandardResponseMixin, APIView):
         """
 
         try:
-            serializer = IdDocumentCreateInput(data=request.data)
+            serializer = CurriculumCreateInput(data=request.data)
             if not serializer.is_valid():
                 return self.get_error_response(
                     error_data=serializer.errors, status_code=status.HTTP_400_BAD_REQUEST
@@ -39,7 +49,7 @@ class IdDocumentAPIView(StandardResponseMixin, APIView):
                 document_type=validated.get("type"),
                 file=validated["file"],
             )
-            output_serializer = IdDocumentCreateOutput(document)
+            output_serializer = CurriculumCreateOutput(document)
 
             return self.get_success_response(
                 output_serializer.data, status.HTTP_201_CREATED
@@ -50,6 +60,4 @@ class IdDocumentAPIView(StandardResponseMixin, APIView):
                 status_code=e.status_code,
             )
         except Exception:
-            return self.get_error_response(
-                PostIdDocumentException()
-            )
+            return self.get_error_response(PostCurriculumException())

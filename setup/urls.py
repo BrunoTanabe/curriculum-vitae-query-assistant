@@ -11,8 +11,10 @@ from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
     @CreatedAt 2025-05-07
 """
 
+
 def redirect_to_docs(request):
     return redirect("docs")
+
 
 urlpatterns = [
     # URLs gerais
@@ -27,8 +29,8 @@ urlpatterns = [
     path("api/v1/download/", SpectacularAPIView.as_view(), name="schema"),
     path("api/v1/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     # URLs dos aplicativos
-    #path(
+    # path(
     #    "api/v1/",
     #    include("apps.identification_document.urls.id_document_url"),
-    #),
+    # ),
 ]

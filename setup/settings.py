@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import environ
+from mongoengine import connect
 
 """
     The Script settings.py.
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # Aplicativos locais
     "apps.accounts",
-    "apps.documents",
+    "apps.curricula_vitae",
 ]
 
 REST_FRAMEWORK = {
@@ -63,44 +64,72 @@ MIDDLEWARE = [
     "apps.core.controls.standard_response_middleware.StandardResponseMiddleware",
 ]
 
-ROOT_URLCONF = 'setup.urls'
+ROOT_URLCONF = "setup.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'setup.wsgi.application'
+WSGI_APPLICATION = "setup.wsgi.application"
+
+env.prefix = "POSTGRESQL_"
+POSTGRES_DATABASE_NAME = env.str("DATABASE_NAME")
+POSTGRES_USERNAME = env.str("USERNAME")
+POSTGRES_PASSWORD = env.str("PASSWORD")
+POSTGRES_HOST = env.str("HOST", "localhost")
+POSTGRES_PORT = env.int("PORT", 5432)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": POSTGRES_DATABASE_NAME,
+        "USER": POSTGRES_USERNAME,
+        "PASSWORD": POSTGRES_PASSWORD,
+        "HOST": POSTGRES_HOST,
+        "PORT": POSTGRES_PORT,
     }
 }
 
+env.prefix = "MONGODB_"
+MONGODB_USERNAME = env.str("USERNAME")
+MONGODB_PASSWORD = env.str("PASSWORD")
+MONGODB_DATABASE_NAME = env.str("DATABASE_NAME")
+MONGODB_HOST = env.str("HOST")
+MONGODB_PORT = env.int("PORT")
+MONGODB_AUTHENTICATION_SOURCE = env.str("AUTHENTICATION_SOURCE")
+
+connect(
+    db=MONGODB_DATABASE_NAME,
+    username=MONGODB_USERNAME,
+    password=MONGODB_PASSWORD,
+    host=MONGODB_HOST,
+    port=MONGODB_PORT,
+    authentication_source=MONGODB_AUTHENTICATION_SOURCE,
+)
+
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -109,8 +138,8 @@ TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = "static/"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Curriculum Vitae Query Assistant",

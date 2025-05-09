@@ -2,8 +2,7 @@ import json
 
 from django.http import JsonResponse
 
-from apps.core.controls.standard_api_response import \
-    StandardApiResponse
+from apps.core.controls.standard_api_response import StandardApiResponse
 
 """
 The Middleware standard_response_middleware.py.
@@ -37,11 +36,11 @@ class StandardResponseMiddleware:
                     response_data = json.loads(response.content)
 
                     if not (
-                            isinstance(response_data, dict)
-                            and all(
-                        key in response_data
-                        for key in ["code", "status", "response", "path", "method"]
-                    )
+                        isinstance(response_data, dict)
+                        and all(
+                            key in response_data
+                            for key in ["code", "status", "response", "path", "method"]
+                        )
                     ):
                         api_response = StandardApiResponse.error(
                             error_data=response_data,

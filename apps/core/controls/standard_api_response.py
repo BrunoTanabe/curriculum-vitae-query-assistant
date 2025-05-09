@@ -43,7 +43,7 @@ class StandardApiResponse:
 
     @classmethod
     def error(
-            cls, error_data=None, code=status.HTTP_400_BAD_REQUEST, path=None, method=None
+        cls, error_data=None, code=status.HTTP_400_BAD_REQUEST, path=None, method=None
     ):
         """
         Cria uma resposta de erro padronizada.
