@@ -1,0 +1,3 @@
+Extração de dados de documentos - Tech4Humans: https://medium.com/@Tech4Humans/extração-de-dados-de-documentos-06c43ce2359c
+Best OCR Models for Text Recognition in Images - RoboFlow: https://blog.roboflow.com/best-ocr-models-text-recognition/
+EasyOCR: A Comprehensive Guide - Aditya Mahajan: https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168
