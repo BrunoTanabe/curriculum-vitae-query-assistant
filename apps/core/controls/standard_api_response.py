@@ -15,10 +15,10 @@ class StandardApiResponse:
     Todas as respostas seguirão o formato definido nesta classe.
     """
 
-    def __init__(self, code=None, status_msg=None, response=None, path=None, method=None):
+    def __init__(self, code=None, status=None, response=None, path=None, method=None):
         self.code = code
-        self.status_msg = status_msg
-        self.response = response if response is not None else {}
+        self.status = status
+        self.response = response
         self.path = path
         self.method = method
 
@@ -28,7 +28,7 @@ class StandardApiResponse:
         """
         return {
             "code": self.code,
-            "status": self.status_msg,
+            "status": self.status,
             "response": self.response,
             "path": self.path,
             "method": self.method,
@@ -39,15 +39,11 @@ class StandardApiResponse:
         """
         Cria uma resposta de sucesso padronizada.
         """
-        return cls(code=code, status_msg="SUCCESS", response=data, path=path, method=method)
+        return cls(code=code, status="SUCCESS", response=data, path=path, method=method)
 
     @classmethod
-    def error(
-        cls, error_data=None, code=status.HTTP_400_BAD_REQUEST, path=None, method=None
-    ):
+    def error(cls, error=None, code=status.HTTP_400_BAD_REQUEST, path=None, method=None):
         """
         Cria uma resposta de erro padronizada.
         """
-        return cls(
-            code=code, status_msg="ERROR", response=error_data, path=path, method=method
-        )
+        return cls(code=code, status="ERROR", response=error, path=path, method=method)

@@ -36,13 +36,13 @@ class StandardResponseRenderer(JSONRenderer):
             method = None
 
         if isinstance(data, dict) and all(
-            key in data for key in ["code", "status", "response", "path", "method"]
+                key in data for key in ["code", "status", "response", "path", "method"]
         ):
             standardized_data = data
         else:
             if response and response.status_code >= 400:
                 api_response = StandardApiResponse.error(
-                    error_data=data,
+                    error=data,
                     code=response.status_code or status.HTTP_400_BAD_REQUEST,
                     path=path,
                     method=method,

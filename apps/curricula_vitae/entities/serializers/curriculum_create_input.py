@@ -8,7 +8,7 @@ The Serializer curriculum_create_input.py.
 O serializador curriculum_create_input.py valida e processa os dados de entrada para a criação de um currículo.
 
 @Author Bruno Tanabe
-@CreatedAt 2025-05-08
+@CreatedAt 2025-05-080
 """
 
 
@@ -44,9 +44,9 @@ class CurriculumCreateInput(serializers.Serializer):
         default="Qual dos candidatos tem o currículo mais compatível com uma vaga de Desenvolvedor FrontEnd React?",
         help_text="Sua pergunta (máx. 256 caracteres). Caso deseje obter uma lista com o resumo do currículo de todos os candidatos, deixe esse campo TOTALMENTE vazio (sem espaços) ou não envie esse campo.",
         error_messages={
-            f"max_length": "O campo 'name' deve ter no máximo 256 caracteres.",
-            f"blank": "O campo 'name' não pode estar vazio. Se não quiser fazer uma pergunta, deixe o campo vazio (sem espaços) ou não envie esse campo.",
-            f"null": "O campo 'name' não pode ser nulo. Se não quiser fazer uma pergunta, deixe o campo vazio (sem espaços) ou não envie esse campo.",
+            f"max_length": "O campo 'query' deve ter no máximo 256 caracteres.",
+            f"blank": "O campo 'query' não pode estar vazio. Se não quiser fazer uma pergunta, deixe o campo vazio (sem espaços) ou não envie esse campo.",
+            f"null": "O campo 'query' não pode ser nulo. Se não quiser fazer uma pergunta, deixe o campo vazio (sem espaços) ou não envie esse campo.",
         },
     )
 

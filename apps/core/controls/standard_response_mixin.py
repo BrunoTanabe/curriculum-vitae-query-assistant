@@ -18,37 +18,34 @@ class StandardResponseMixin:
     Mixin para ser utilizado nas views que precisam retornar respostas padronizadas.
     """
 
-    def get_success_response(self, data=None, status_code=status.HTTP_200_OK):
+    def get_success_response(self, data=None, code=status.HTTP_200_OK):
         """
         Cria uma resposta de sucesso padronizada.
         """
         request = self.request
         api_response = StandardApiResponse.success(
-            data=data, code=status_code, path=request.path, method=request.method
+            data=data, code=code, path=request.path, method=request.method
         )
-        return Response(api_response.to_dict(), status=status_code)
+        return Response(api_response.to_dict(), status=code)
 
-    def get_error_response(self, error_data=None, status_code=status.HTTP_400_BAD_REQUEST):
+    def get_error_response(
+            self, error="Ocorrreu um erro inesperado.", code=status.HTTP_400_BAD_REQUEST
+    ):
         """
         Cria uma resposta de erro padronizada.
-
-        Aceita um dicionário `error_data` ou uma instância de `CustomAPIException`.
         """
         request = self.request
 
-        if isinstance(error_data, CustomAPIException):
-            status_code = error_data.status_code
-            error_data = error_data.detail
-        else:
-            error_data = {
-                "error": error_data if error_data else "Ocorrreu um erro inesperado.",
-            }
+        if isinstance(error, CustomAPIException):
+            code = error.code
+            error = error.error
 
         api_response = StandardApiResponse.error(
-            error_data=error_data,
-            code=status_code,
+            error=error,
+            code=code,
             path=request.path,
             method=request.method,
         )
 
-        return Response(api_response.to_dict(), status=status_code)
+        return Response(api_response.to_dict(), status=code)
+

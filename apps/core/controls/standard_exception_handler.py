@@ -29,26 +29,26 @@ def standard_exception_handler(exc, context):
         if response is None:
             # TODO: Adicionar mais exceções específicas
             if isinstance(exc, Http404):
-                status_code = status.HTTP_404_NOT_FOUND
-                error_data = {"detail": "Recurso não encontrado."}
+                code = status.HTTP_404_NOT_FOUND
+                error = {"error": "Recurso não encontrado."}
             else:
-                status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-                error_data = {"detail": "Ocorreu um erro interno no servidor."}
+                code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                error = {"error": "Ocorreu um erro interno no servidor."}
         else:
-            status_code = response.status_code
-            error_data = response.data
+            code = response.code
+            error = response.data
 
         api_response = StandardApiResponse.error(
-            error_data=error_data, code=status_code, path=path, method=method
+            error=error, code=code, path=path, method=method
         )
 
-        return Response(api_response.to_dict(), status=status_code)
+        return Response(api_response.to_dict(), status=code)
     except Exception:
-        status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        error_data = {"detail": "Ocorreu um erro interno no servidor."}
+        code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        error = {"detail": "Ocorreu um erro interno no servidor."}
 
         api_response = StandardApiResponse.error(
-            error_data=error_data, code=status_code, path=None, method=None
+            error=error, code=code, path=None, method=None
         )
 
-        return Response(api_response.to_dict(), status=status_code)
+        return Response(api_response.to_dict(), status=code)

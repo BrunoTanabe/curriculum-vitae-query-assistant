@@ -16,11 +16,11 @@ class CustomAPIException(APIException):
     Permite criar exceções com códigos e mensagens específicas.
     """
 
-    def __init__(self, detail=None, status_code=None):
-        if detail is None:
-            detail = "Ocorreu um erro inesperado."
-        if status_code is None:
-            status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+    def __init__(self, error=None, code=None):
+        if error is None:
+            error = "Ocorreu um erro inesperado."
+        if code is None:
+            code = status.HTTP_500_INTERNAL_SERVER_ERROR
 
-        self.detail = detail
-        self.status_code = status_code
+        self.error = error
+        self.code = code
