@@ -24,6 +24,14 @@ env.prefix = "DJANGO_"
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.str("DEBUG")
 
+env.prefix = "APPLICATION_"
+APPLICATION_LLM_PROVIDER=env.str("LLM_PROVIDER")
+APPLICATION_OCR_MODEL=env.str("OCR_MODEL")
+APPLICATION_LLM_MODEL=env.str("LLM_MODEL")
+
+env.prefix = "HUGGINGFACE_"
+HUGGINGFACE_ACCESS_TOKEN = env.str("ACCESS_TOKEN")
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -156,6 +164,3 @@ SPECTACULAR_SETTINGS = {
         "filter": True,
     },
 }
-
-env.prefix = "HUGGINGFACE_"
-HUGGINGFACE_ACCESS_TOKEN = env.str("ACCESS_TOKEN")

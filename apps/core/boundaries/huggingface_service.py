@@ -36,7 +36,7 @@ class HuggingFaceService(LLMService):
         """
         try:
             completion = self.client.chat.completions.create(
-                model="deepseek-ai/DeepSeek-V3-0324",
+                model=settings.APPLICATION_LLM_MODEL,
                 temperature=1.0,
                 response_format="text",
                 messages=[{"role": "user", "content": curriculum}],
@@ -53,7 +53,7 @@ class HuggingFaceService(LLMService):
         """
         try:
             completion = self.client.chat.completions.create(
-                model="deepseek-ai/DeepSeek-V3-0324",
+                model=settings.APPLICATION_LLM_MODEL,
                 temperature=1.0,
                 response_format="json",
                 messages=[{"role": "user", "content": curriculum}],
