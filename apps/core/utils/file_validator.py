@@ -1,10 +1,10 @@
 import os
 
+from PIL import Image
+from PyPDF2 import PdfReader
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_image_file_extension
 from django.utils.translation import gettext_lazy as _
-from PIL import Image
-from PyPDF2 import PdfReader
 
 from apps.core.entities.enums.allowed_files import AllowedFiles
 from apps.core.entities.enums.allowed_images import AllowedImages

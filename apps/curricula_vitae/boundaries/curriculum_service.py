@@ -1,11 +1,11 @@
 import uuid
-from typing import List
 
-from django.core.files.uploadedfile import UploadedFile
+from django.conf import settings
 from django.utils import timezone
 
 from apps.core.boundaries.interfaces.llm_service import LLMService
 from apps.core.boundaries.interfaces.ocr_service import OCRService
+from apps.core.boundaries.pypdf_service import PyPDFService
 from apps.curricula_vitae.entities.serializers.curriculum_create_output import \
     CurriculumCreateOutput
 
@@ -23,13 +23,14 @@ class CurriculumService:
     Serviço de criação de documentos de identificação.
     """
 
-    def __init__(self, ocr_model: OCRService, llm_provider: LLMService) -> None:
-        self.ocr_model = ocr_model
-        self.llm_provider = llm_provider
+    def __init__(self, ocr_service: OCRService, llm_service: LLMService, pdf_service: PyPDFService) -> None:
+        self.ocr_service = ocr_service
+        self.llm_service = llm_service
+        self.pdf_service = pdf_service
 
     def create(
-        self,
-        data,
+            self,
+            data,
     ) -> CurriculumCreateOutput:
         """
         Processa o upload de arquivos de currículo e a pergunta e retorna o resultado.
@@ -37,25 +38,29 @@ class CurriculumService:
         """
 
         curricula_txt = ""
+
         for file in data["files"]:
-            # Verifica se o arquivo é um PDF
-            if file.name.endswith(".pdf"):
-                print("")
-            else:
-                curricula_txt += self.ocr_model.recognize_text(file)
+            curricula_txt = "{$$\n"
 
-        document_id = uuid.uuid4()
+            curricula_txt += f"CURRÍCULO {data['files'].index(file) + 1} ({file.name}):\n"
 
-        extension, url = self.storage.upload_document(document_id, document_type, file)
+            if file.content_type == "application/pdf":
+                curricula_txt += self.pdf_service.extract_text(file)
+            else:  # não preciso de mais nenhuma verificação, o tipo de arquivo já foi validado no serializer
+                curricula_txt += self.ocr_service.recognize_text(file)
 
-        document = IdDocument.objects.create(
-            id=document_id,
-            name=name if name else None,
-            type=document_type,
-            url=url,
-            extension=extension,
-            sent_at=timezone.now(),
+            curricula_txt += "\n$$}"
+
+        if not data.get("query"):
+            llm_response = self.llm_service.curricula_summarization(curricula=curricula_txt)
+        else:
+            llm_response = self.llm_service.curricula_analysis(
+                curricula=curricula_txt,
+                query=str(data["query"]),
+            )
+
+        return CurriculumCreateOutput(
+            ocr_model=settings.APPLICATION_OCR_MODEL,
+            llm_model=settings.APPLICATION_LLM_MODEL,
+            llm_response=llm_response,
         )
-
-        output_serializer = CurriculumCreateOutput(document)
-        return document

@@ -30,7 +30,7 @@ class OCRService(ABC):
         pass
 
     @abstractmethod
-    def recognize_text(self, images: list) -> str:
+    def recognize_text(self, image) -> str:
         """
         Realiza o reconhecimento óptico de caracteres (OCR) em uma lista de imagens.
         """

@@ -30,7 +30,7 @@ class HuggingFaceService(LLMService):
         )
 
     # TODO: Definir prompt para análise de currículo
-    def curriculum_analysis(self, curriculum: str, query) -> str:
+    def curricula_analysis(self, curricula: str, query) -> str:
         """
         Realiza a análise de um currículo utilizando o modelo LLM do Hugging Face.
         """
@@ -39,7 +39,7 @@ class HuggingFaceService(LLMService):
                 model=settings.APPLICATION_LLM_MODEL,
                 temperature=1.0,
                 response_format="text",
-                messages=[{"role": "user", "content": curriculum}],
+                messages=[{"role": "user", "content": curricula}],
             )
 
             return completion.choices[0].message
@@ -47,7 +47,7 @@ class HuggingFaceService(LLMService):
             raise CurriculumAnalysis()
 
     # TODO: Definir prompt para sumarização de currículo
-    def curriculum_summarization(self, curriculum: str) -> str:
+    def curricula_summarization(self, curricula: str) -> str:
         """
         Realiza a sumarização de um currículo utilizando o modelo LLM do Hugging Face.
         """
@@ -56,7 +56,7 @@ class HuggingFaceService(LLMService):
                 model=settings.APPLICATION_LLM_MODEL,
                 temperature=1.0,
                 response_format="json",
-                messages=[{"role": "user", "content": curriculum}],
+                messages=[{"role": "user", "content": curricula}],
             )
 
             return completion.choices[0].message

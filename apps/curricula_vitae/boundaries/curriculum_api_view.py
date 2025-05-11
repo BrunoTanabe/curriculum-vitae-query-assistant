@@ -12,8 +12,6 @@ from apps.curricula_vitae.controls.curriculum_exception import \
     PostCurriculumException
 from apps.curricula_vitae.entities.serializers.curriculum_create_input import \
     CurriculumCreateInput
-from apps.curricula_vitae.entities.serializers.curriculum_create_output import \
-    CurriculumCreateOutput
 
 """
 The View curriculum_api_view.py.
@@ -29,25 +27,25 @@ class CurriculumAPIView(StandardResponseMixin, APIView):
     @inject
     # @curriculum_post
     def post(
-        self,
-        request,
-        curriculum_service: CurriculumService = Provide[
-            CurriculumContainer.curriculum_service
-        ],
+            self,
+            request,
+            curriculum_service: CurriculumService = Provide[
+                CurriculumContainer.curriculum_service
+            ],
     ):
         """
         Método para realizar o upload de um ou mais currículos e receber a resposta do LLM.
         """
         try:
-            curriculum_serializer = CurriculumCreateInput(data=request)
+            input_serializer = CurriculumCreateInput(data=request)
 
-            if not curriculum_serializer.is_valid():
+            if not input_serializer.is_valid():
                 return self.get_error_response(
-                    error=curriculum_serializer.errors, code=status.HTTP_400_BAD_REQUEST
+                    error=input_serializer.errors, code=status.HTTP_400_BAD_REQUEST
                 )
 
             return self.get_success_response(
-                curriculum_service.create(curriculum_serializer.validated_data),
+                curriculum_service.create(input_serializer.validated_data),
                 status.HTTP_200_OK,
             )
         except CustomAPIException as e:

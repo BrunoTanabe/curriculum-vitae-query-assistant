@@ -24,14 +24,14 @@ class LLMService(ABC):
         pass
 
     @abstractmethod
-    def curriculum_analysis(self, curriculum: str, query) -> str:
+    def curricula_analysis(self, curricula: str, query) -> str:
         """
         Realiza a análise de um currículo utilizando o modelo LLM.
         """
         pass
 
     @abstractmethod
-    def curriculum_summarization(self, curriculum: str) -> str:
+    def curricula_summarization(self, curricula: str) -> str:
         """
         Realiza a sumarização de um currículo utilizando o modelo LLM.
         """

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.urls import include, path
+from django.urls import path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
 

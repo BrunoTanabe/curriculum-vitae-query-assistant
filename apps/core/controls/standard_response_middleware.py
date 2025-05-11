@@ -36,11 +36,11 @@ class StandardResponseMiddleware:
                     response_data = json.loads(response.content)
 
                     if not (
-                        isinstance(response_data, dict)
-                        and all(
-                            key in response_data
-                            for key in ["code", "status", "response", "path", "method"]
-                        )
+                            isinstance(response_data, dict)
+                            and all(
+                        key in response_data
+                        for key in ["code", "status", "response", "path", "method"]
+                    )
                     ):
                         api_response = StandardApiResponse.error(
                             error=response_data,

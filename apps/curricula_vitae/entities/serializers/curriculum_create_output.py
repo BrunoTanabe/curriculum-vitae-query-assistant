@@ -36,7 +36,7 @@ class CurriculumCreateOutput(serializers.Serializer):
         allow_blank=False,
         allow_null=False,
         required=True,
-        default=LLMModels.LLAMA3,
+        default=LLMModels.DEEPSEEKV3,
         help_text=f"Modelo de LLM utilizado: {', '.join(LLMModels.values)}",
         error_messages={
             "invalid_choice": f"O campo 'llm_model' deve ter um dos seguintes valores: {', '.join(LLMModels.values)}.",

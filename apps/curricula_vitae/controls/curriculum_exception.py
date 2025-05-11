@@ -17,7 +17,6 @@ class PostCurriculumException(CustomAPIException):
     """
 
     def __init__(self):
-
         error = {
             "error": "Não foi possível enviar os dados referentes aos currículos, tente novamente mais tarde."
         }

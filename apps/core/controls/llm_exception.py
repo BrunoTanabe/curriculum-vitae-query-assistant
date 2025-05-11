@@ -1,7 +1,6 @@
 from rest_framework import status
 
 from apps.core.controls.custom_api_exception import CustomAPIException
-from apps.core.entities.enums.allowed_images import AllowedImages
 
 """
 The Script llm_exception.py.
@@ -18,7 +17,6 @@ class CurriculumAnalysis(CustomAPIException):
     """
 
     def __init__(self):
-
         error = {
             "error": "Não foi possível obter a resposta da análise de currículos. Tente novamente mais tarde."
         }
@@ -33,7 +31,6 @@ class CurriculumSummarization(CustomAPIException):
     """
 
     def __init__(self):
-
         error = {
             "error": "Não foi possível obter a resposta do resumo de currículos. Tente novamente mais tarde."
         }

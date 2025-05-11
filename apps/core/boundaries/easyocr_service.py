@@ -61,7 +61,7 @@ class EasyOCRService(OCRService):
 
             for line in model_response:
                 result += line[1]
-                result += "\n"
+                result += " "
 
             return result
 

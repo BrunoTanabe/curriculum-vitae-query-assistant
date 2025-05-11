@@ -10,7 +10,6 @@ O modelo curriculum.py representa os logs das operações realizadas em currícu
 
 
 class Curriculum(Document):
-
     request_id = UUIDField(
         db_field="request_id", required=True, unique=True, primary_key=True
     )
