@@ -1,12 +1,18 @@
 from dependency_injector import containers, providers
 from django.conf import settings
 
+from apps.core.boundaries import easyocr_service
+from apps.core.boundaries.easyocr_service import EasyOCRService
+from apps.core.entities.enums.ocr_models import OCRModels
+from apps.curricula_vitae.boundaries.curriculum_service import \
+    CurriculumService
+
 """
-The Class curriculum_container.py.
-A classe curriculum_container.py é um contêiner de injeção de dependência que fornece instâncias de serviços e armazenamento para o aplicativo de curriculos.
+The Container curriculum_container.py.
+A classe curriculum_container.py é um contêiner de injeção de dependências que fornece instâncias de serviços e componentes necessários para o funcionamento do aplicativo.
 
 @Author Bruno Tanabe
-@CreatedAt 2025-05-08
+@CreatedAt 2025-05-10
 """
 
 
@@ -19,20 +25,13 @@ class CurriculumContainer(containers.DeclarativeContainer):
         modules=["apps.curricula_vitae.boundaries.curriculum_api_view"]
     )
 
-    application_storage = settings.APPLICATION_STORAGE
+    application_ocr_model = settings.APPLICATION_OCR_MODEL
 
-    if application_storage == "aws":
-        aws_storage = providers.Singleton(AWSStorage)
-        identification_document_service = providers.Factory(
-            CurriculumService, storage=aws_storage
-        )
-    elif application_storage == "local":
-        local_storage = providers.Singleton(LocalStorage)
-        identification_document_service = providers.Factory(
-            CurriculumService, storage=local_storage
-        )
+    if application_ocr_model == "easyocr":
+        easyocr_service = providers.Singleton(EasyOCRService)
+        curriculum_service = providers.Factory(CurriculumService, ocr_model=easyocr_service)
     else:
         raise ValueError(
-            f"Tipo de armazenamento inválido: {application_storage}. "
-            "Apenas 'aws' ou 'local' são suportados."
+            f"Tipo de modelo de OCR inválido: {application_ocr_model}. "
+            f"Os modelos suportados são: {OCRModels.values}."
         )

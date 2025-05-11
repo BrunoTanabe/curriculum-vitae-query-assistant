@@ -156,3 +156,6 @@ SPECTACULAR_SETTINGS = {
         "filter": True,
     },
 }
+
+env.prefix = "HUGGINGFACE_"
+HUGGINGFACE_ACCESS_TOKEN = env.str("ACCESS_TOKEN")

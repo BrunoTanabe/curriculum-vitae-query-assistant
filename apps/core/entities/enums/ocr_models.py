@@ -23,5 +23,3 @@ class OCRModels(models.TextChoices):
     """
 
     EASYOCR = "easy_ocr", _("Easy OCR")
-    TESSERACT = "tesseract", _("Tesseract")
-    PADDLEOCR = "paddleocr", _("PaddleOCR")

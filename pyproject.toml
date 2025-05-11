@@ -14,6 +14,7 @@ dependencies = [
     "djangorestframework>=3.16.0",
     "drf-spectacular>=0.28.0",
     "easyocr[portuguese]>=1.7.2",
+    "huggingface-hub>=0.31.1",
     "markdown>=3.8",
     "mongoengine>=0.29.1",
     "pillow>=11.2.1",

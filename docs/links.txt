@@ -1,3 +1,6 @@
-Extração de dados de documentos - Tech4Humans: https://medium.com/@Tech4Humans/extração-de-dados-de-documentos-06c43ce2359c
 Best OCR Models for Text Recognition in Images - RoboFlow: https://blog.roboflow.com/best-ocr-models-text-recognition/
+Extração de dados de documentos - Tech4Humans: https://medium.com/@Tech4Humans/extração-de-dados-de-documentos-06c43ce2359c
 EasyOCR: A Comprehensive Guide - Aditya Mahajan: https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168
+EasyOCR Documentation: https://www.jaided.ai/easyocr/documentation/
+HuggingFace Chat Completion Documentation: https://huggingface.co/docs/inference-providers/tasks/chat-completion
+Using client.chat.completions.create() - Doug Creates: https://medium.com/@Doug-Creates/nightmares-and-client-chat-completions-create-29ad0acbe16a

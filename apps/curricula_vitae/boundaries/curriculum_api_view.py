@@ -4,12 +4,16 @@ from rest_framework.views import APIView
 
 from apps.core.controls.custom_api_exception import CustomAPIException
 from apps.core.controls.standard_response_mixin import StandardResponseMixin
+from apps.curricula_vitae.boundaries.curriculum_service import \
+    CurriculumService
 from apps.curricula_vitae.containers.curriculum_container import \
     CurriculumContainer
 from apps.curricula_vitae.controls.curriculum_exception import \
     PostCurriculumException
 from apps.curricula_vitae.entities.serializers.curriculum_create_input import \
     CurriculumCreateInput
+from apps.curricula_vitae.entities.serializers.curriculum_create_output import \
+    CurriculumCreateOutput
 
 """
 The View curriculum_api_view.py.
@@ -23,12 +27,12 @@ A view curriculum_api_view.py é responsável por lidar com as requisições HTT
 class CurriculumAPIView(StandardResponseMixin, APIView):
 
     @inject
-    @document_post
+    @curriculum_post
     def post(
         self,
         request,
-        identification_document_service: IdDocumentService = Provide[
-            CurriculumContainer.identification_document_service
+        curriculum_service: CurriculumService = Provide[
+            CurriculumContainer.curriculum_service
         ],
     ):
         """
@@ -44,7 +48,7 @@ class CurriculumAPIView(StandardResponseMixin, APIView):
 
             validated = serializer.validated_data
 
-            document = identification_document_service.create(
+            document = curriculum_service.create(
                 name=validated.get("name"),
                 document_type=validated.get("type"),
                 file=validated["file"],

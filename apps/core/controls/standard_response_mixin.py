@@ -29,7 +29,7 @@ class StandardResponseMixin:
         return Response(api_response.to_dict(), status=code)
 
     def get_error_response(
-            self, error="Ocorrreu um erro inesperado.", code=status.HTTP_400_BAD_REQUEST
+        self, error="Ocorrreu um erro inesperado.", code=status.HTTP_400_BAD_REQUEST
     ):
         """
         Cria uma resposta de erro padronizada.
@@ -48,4 +48,3 @@ class StandardResponseMixin:
         )
 
         return Response(api_response.to_dict(), status=code)
-
