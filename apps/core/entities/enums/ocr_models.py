@@ -18,8 +18,6 @@ class OCRModels(models.TextChoices):
     Ela utiliza as TextChoices do Django para fornecer um conjunto de opções predefinidas para um campo de modelo.
 
     EASYOCR (str): Representa o modelo Easy OCR.
-    TESSERACT (str): Representa o modelo Tesseract.
-    PADDLEOCR (str): Representa o modelo Paddle OCR.
     """
 
     EASYOCR = "easy_ocr", _("Easy OCR")

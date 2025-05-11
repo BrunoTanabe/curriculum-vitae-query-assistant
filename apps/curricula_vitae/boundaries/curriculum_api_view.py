@@ -27,7 +27,7 @@ A view curriculum_api_view.py é responsável por lidar com as requisições HTT
 class CurriculumAPIView(StandardResponseMixin, APIView):
 
     @inject
-    @curriculum_post
+    # @curriculum_post
     def post(
         self,
         request,
@@ -36,32 +36,24 @@ class CurriculumAPIView(StandardResponseMixin, APIView):
         ],
     ):
         """
-        Método para criar um documento de identificação.
+        Método para realizar o upload de um ou mais currículos e receber a resposta do LLM.
         """
-
         try:
-            serializer = CurriculumCreateInput(data=request.data)
-            if not serializer.is_valid():
+            curriculum_serializer = CurriculumCreateInput(data=request)
+
+            if not curriculum_serializer.is_valid():
                 return self.get_error_response(
-                    error_data=serializer.errors, status_code=status.HTTP_400_BAD_REQUEST
+                    error=curriculum_serializer.errors, code=status.HTTP_400_BAD_REQUEST
                 )
 
-            validated = serializer.validated_data
-
-            document = curriculum_service.create(
-                name=validated.get("name"),
-                document_type=validated.get("type"),
-                file=validated["file"],
-            )
-            output_serializer = CurriculumCreateOutput(document)
-
             return self.get_success_response(
-                output_serializer.data, status.HTTP_201_CREATED
+                curriculum_service.create(curriculum_serializer.validated_data),
+                status.HTTP_200_OK,
             )
         except CustomAPIException as e:
             return self.get_error_response(
-                error_data={"detail": str(e.detail)},
-                status_code=e.status_code,
+                error={"error": str(e.error)},
+                code=e.status_code,
             )
         except Exception:
             return self.get_error_response(PostCurriculumException())

@@ -17,13 +17,7 @@ class LLMModels(models.TextChoices):
     Esta classe define os possíveis modelos de LLM que podem ser utilizados no sistema.
     Ela utiliza as TextChoices do Django para fornecer um conjunto de opções predefinidas para um campo de modelo.
 
-    LLAMA3 (str): Representa o modelo Llama 3.
-    GPT4 (str): Representa o modelo GPT-4.
-    GPT4_32K (str): Representa o modelo GPT-4 com 32k tokens.
-    GPT3_5 (str): Representa o modelo GPT-3.5.
+    DEEPSEEKV3 (str): Representa o modelo DeepSeek V3.
     """
 
-    LLAMA3 = "llama3", _("Llama 3")
-    GPT4 = "gpt4", _("GPT-4")
-    GPT4_32K = "gpt4-32k", _("GPT-4 32k")
-    GPT3_5 = "gpt3.5", _("GPT-3.5")
+    DEEPSEEKV3 = "deepseek-ai/DeepSeek-V3-0324", _("DeepSeek AI - DeepSeek V3 0324")

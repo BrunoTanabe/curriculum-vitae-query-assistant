@@ -36,40 +36,34 @@ class EasyOCRService(OCRService):
         # Aqui você pode adicionar qualquer pré-processamento necessário na imagem
         return image
 
-    # TODO: Definir o tipo da lista
-    def recognize_text(self, images: list) -> str:
+    def recognize_text(self, image) -> str:
         """
         Realiza o reconhecimento óptico de caracteres (OCR) em uma lista de imagens.
         """
 
         result = ""
 
-        for image in images:
-            try:
-                image = self.__prepare_image(image)
+        try:
+            image = self.__prepare_image(image)
 
-                result += f"CURRÍCULO {images.index(image)}\n"
-                result += "{$$"
+            model_response = self.reader.readtext(
+                image=image,
+                batch_size=8,
+                paragraph=True,
+                blocklist=["$"],
+                width_ths=0.8,
+                add_margin=0.2,
+                x_ths=0.9,
+                y_ths=0.6,
+                min_size=20,
+                link_threshold=0.2,
+            )
 
-                model_response = self.reader.readtext(
-                    image=image,
-                    batch_size=8,
-                    paragraph=True,
-                    blocklist=["$"],
-                    width_ths=0.8,
-                    add_margin=0.2,
-                    x_ths=0.9,
-                    y_ths=0.6,
-                    min_size=20,
-                    link_threshold=0.2,
-                )
+            for line in model_response:
+                result += line[1]
+                result += "\n"
 
-                for line in model_response:
-                    result += line[1]
-                    result += "\n"
+            return result
 
-                result += "$$}\n"
-            except Exception:
-                raise ReadTextException(detail=image.name)
-
-        return result
+        except Exception:
+            raise ReadTextException(detail=image.name)

@@ -22,7 +22,7 @@ class CurriculumCreateOutput(serializers.Serializer):
         allow_blank=False,
         allow_null=False,
         required=True,
-        default=OCRModels.TESSERACT,
+        default=OCRModels.EASYOCR,
         help_text=f"Modelo de OCR utilizado: {', '.join(OCRModels.values)}",
         error_messages={
             "invalid_choice": f"O campo 'ocr_model' deve ter um dos seguintes valores: {', '.join(OCRModels.values)}.",

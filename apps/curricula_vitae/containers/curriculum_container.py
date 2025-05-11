@@ -3,6 +3,7 @@ from django.conf import settings
 
 from apps.core.boundaries import easyocr_service
 from apps.core.boundaries.easyocr_service import EasyOCRService
+from apps.core.boundaries.huggingface_service import HuggingFaceService
 from apps.core.entities.enums.ocr_models import OCRModels
 from apps.curricula_vitae.boundaries.curriculum_service import \
     CurriculumService
@@ -16,6 +17,7 @@ A classe curriculum_container.py é um contêiner de injeção de dependências 
 """
 
 
+# TODO: Adicionar suporte para outros provedores de OCR e LLM, melhorar a lógica de injeção de dependências
 class CurriculumContainer(containers.DeclarativeContainer):
     """
     Container para o serviço de currículos.
@@ -26,12 +28,16 @@ class CurriculumContainer(containers.DeclarativeContainer):
     )
 
     application_ocr_model = settings.APPLICATION_OCR_MODEL
+    application_llm_provider = settings.APPLICATION_LLM_PROVIDER
 
-    if application_ocr_model == "easyocr":
+    if (application_ocr_model == "easyocr") and (application_llm_provider == "huggingface"):
         easyocr_service = providers.Singleton(EasyOCRService)
-        curriculum_service = providers.Factory(CurriculumService, ocr_model=easyocr_service)
+        huggingface_service = providers.Singleton(HuggingFaceService)
+        curriculum_service = providers.Factory(
+            CurriculumService, ocr_model=easyocr_service, llm_provider=huggingface_service
+        )
     else:
-        raise ValueError(
-            f"Tipo de modelo de OCR inválido: {application_ocr_model}. "
-            f"Os modelos suportados são: {OCRModels.values}."
+        print(
+            f"Tipo de OCR ou LLM inválido: {application_ocr_model} ou {application_llm_provider}. "
+            "Apenas 'easyocr' e 'huggingface' são suportados no momento."
         )
