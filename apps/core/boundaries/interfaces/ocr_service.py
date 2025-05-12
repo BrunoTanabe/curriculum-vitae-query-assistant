@@ -8,6 +8,7 @@ O service ocr_service.py é responsável por fornecer uma interface para serviç
 @CreatedAt 2025-05-10
 """
 
+# TODO: substituir easyocr pelo tesseract, easyocr tem melhor funcionamento mas o tesseract é muito mais rápido
 
 class OCRService(ABC):
     """

@@ -27,7 +27,7 @@ def standard_exception_handler(exc, context):
         method = request.method if request else None
 
         if response is None:
-            # TODO: Adicionar mais exceções específicas
+            # TODO: adicionar mais exceções específicas
             if isinstance(exc, Http404):
                 code = status.HTTP_404_NOT_FOUND
                 error = {"error": "Recurso não encontrado."}

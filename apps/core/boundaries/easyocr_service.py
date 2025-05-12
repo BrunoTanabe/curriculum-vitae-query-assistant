@@ -21,13 +21,14 @@ class EasyOCRService(OCRService):
     Esta classe encapsula a funcionalidade do EasyOCR, permitindo realizar reconhecimento óptico de caracteres (OCR) em imagens.
     """
 
+    # TODO: adicionar configurção e passo a passo para habilitar a GPU
     def __init__(self, languages: list[str] = ["pt", "en"]):
         """
         Inicializa o serviço EasyOCR com os idiomas especificados.
         """
         self.reader = easyocr.Reader(
             lang_list=languages,
-            gpu=False,
+            gpu=True,
         )
 
     def _preprocess_image(self, image_file) -> np.ndarray:

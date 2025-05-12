@@ -29,7 +29,6 @@ class HuggingFaceService(LLMService):
             provider="hf-inference", api_key=settings.HUGGINGFACE_ACCESS_TOKEN
         )
 
-    # TODO: Definir prompt para análise de currículo
     def curricula_analysis(self, curricula: str, query: str) -> str:
         """
         Realiza a análise de um currículo utilizando o modelo LLM do Hugging Face.
@@ -52,7 +51,6 @@ class HuggingFaceService(LLMService):
         except Exception as e:
             raise CurriculumAnalysis()
 
-    # TODO: Definir prompt para sumarização de currículo
     def curricula_summarization(self, curricula: str) -> str:
         """
         Realiza a sumarização de um currículo utilizando o modelo LLM do Hugging Face.

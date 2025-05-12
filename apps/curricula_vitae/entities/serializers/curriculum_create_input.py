@@ -77,4 +77,4 @@ class CurriculumCreateInput(serializers.Serializer):
     class Meta:
         fields = ["files", "query", "request_id", "user_id"]
 
-    # TODO: Determinar o tamanho máximo para os arquivos e dimensões mínimas e máximas para as imagens
+    # TODO: determinar o tamanho máximo para os arquivos e dimensões mínimas e máximas para as imagens

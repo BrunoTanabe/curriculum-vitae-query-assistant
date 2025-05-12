@@ -13,7 +13,7 @@ O middleware standard_response_middleware.py é um middleware que vai padronizar
 """
 
 
-# TODO: Melhorar a implementação do middleware, lógica pode ser simplificada
+# TODO: melhorar a implementação do middleware, lógica pode ser simplificada
 class StandardResponseMiddleware:
     """
     Middleware para padronizar respostas HTTP de erro que não são processadas pelo DRF.

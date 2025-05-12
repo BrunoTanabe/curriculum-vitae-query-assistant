@@ -16,7 +16,7 @@ A classe curriculum_container.py é um contêiner de injeção de dependências 
 """
 
 
-# TODO: Adicionar suporte para outros provedores de OCR e LLM, melhorar a lógica de injeção de dependências
+# TODO: adicionar suporte para outros provedores de OCR e LLM, melhorar a lógica de injeção de dependências
 class CurriculumContainer(containers.DeclarativeContainer):
     """
     Container para o serviço de currículos.
