@@ -4,3 +4,4 @@ EasyOCR: A Comprehensive Guide - Aditya Mahajan: https://medium.com/@adityamahaj
 EasyOCR Documentation: https://www.jaided.ai/easyocr/documentation/
 HuggingFace Chat Completion Documentation: https://huggingface.co/docs/inference-providers/tasks/chat-completion
 Using client.chat.completions.create() - Doug Creates: https://medium.com/@Doug-Creates/nightmares-and-client-chat-completions-create-29ad0acbe16a
+Model Parameters in OpenAI API - Akash Chandrasekar: https://medium.com/@csakash03/model-parameters-in-openai-api-fe6101d3f813

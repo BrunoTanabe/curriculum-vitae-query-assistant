@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.urls import path
+from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
 
@@ -29,8 +29,8 @@ urlpatterns = [
     path("api/v1/download/", SpectacularAPIView.as_view(), name="schema"),
     path("api/v1/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     # URLs dos aplicativos
-    # path(
-    #    "api/v1/",
-    #    include("apps.identification_document.urls.id_document_url"),
-    # ),
+    path(
+        "api/v1/",
+        include("apps.curricula_vitae.boundaries.curriculum_url"),
+    ),
 ]

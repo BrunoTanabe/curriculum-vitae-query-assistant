@@ -19,13 +19,11 @@ class ReadTextException(CustomAPIException):
 
     def __init__(self, detail=None):
         if detail is None:
-            error = {
-                "error": f"Não foi possível extrair a informação de um ou mais currículos. Verifique se os arquivos {', '.join(AllowedImages.values)} estão legíveis e tente novamente."
-            }
+            error = f"Não foi possível extrair a informação de um ou mais currículos. Verifique se os arquivos {', '.join(AllowedImages.values)} estão legíveis e tente novamente."
             code = status.HTTP_400_BAD_REQUEST
         else:
-            error = {
-                "error": f"Não foi possível extrair a informação de {detail}. Verifique se o tipo de arquivo é aceito ({', '.join(AllowedImages.values)}), estão legível e tente novamente.",
-            }
+            error = (
+                f"Não foi possível extrair a informação de {detail}. Verifique se o tipo de arquivo é aceito ({', '.join(AllowedImages.values)}), estão legível e tente novamente.",
+            )
             code = status.HTTP_400_BAD_REQUEST
         super().__init__(error=error, code=code)

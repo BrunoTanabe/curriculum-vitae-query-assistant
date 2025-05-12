@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     # Aplicativos locais
-    "apps.accounts",
     "apps.curricula_vitae",
 ]
 

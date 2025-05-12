@@ -21,6 +21,7 @@ class CurriculumContainer(containers.DeclarativeContainer):
     """
     Container para o serviço de currículos.
     """
+
     wiring_config = containers.WiringConfiguration(
         modules=["apps.curricula_vitae.boundaries.curriculum_api_view"]
     )
@@ -33,7 +34,10 @@ class CurriculumContainer(containers.DeclarativeContainer):
         huggingface_service = providers.Singleton(HuggingFaceService)
         pypdf_service = providers.Singleton(PyPDFService)
         curriculum_service = providers.Factory(
-            CurriculumService, ocr_service=easyocr_service, llm_service=huggingface_service, pdf_service=pypdf_service
+            CurriculumService,
+            ocr_service=easyocr_service,
+            llm_service=huggingface_service,
+            pdf_service=pypdf_service,
         )
     else:
         print(

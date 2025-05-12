@@ -21,14 +21,14 @@ class CurriculumCreateInput(serializers.Serializer):
         child=serializers.FileField(
             allow_empty_file=False,
             validators=[file_validator],
-            help_text=f"Currículo, arquivos permitidos: {', '.join(AllowedFiles.choices)}.",
+            help_text=f"Currículo, arquivos permitidos: {', '.join(AllowedFiles.values)}.",
             error_messages={
                 "allow_empty_file": "O campo 'files' tem um ou mais arquivos vazios.",
             },
         ),
         required=True,
         allow_empty=False,
-        help_text=f"Currículos, arquivos permitidos: {', '.join(AllowedFiles.choices)}.",
+        help_text=f"Currículos, arquivos permitidos: {', '.join(AllowedFiles.values)}.",
         error_messages={
             "required": "O campo 'files' é obrigatório.",
             "allow_empty": "O campo 'files' não pode estar vazio.",
@@ -41,7 +41,7 @@ class CurriculumCreateInput(serializers.Serializer):
         allow_null=False,
         required=False,
         max_length=256,
-        default="Qual dos candidatos tem o currículo mais compatível com uma vaga de Desenvolvedor FrontEnd React?",
+        default="",
         help_text="Sua pergunta (máx. 256 caracteres). Caso deseje obter uma lista com o resumo do currículo de todos os candidatos, deixe esse campo TOTALMENTE vazio (sem espaços) ou não envie esse campo.",
         error_messages={
             f"max_length": "O campo 'query' deve ter no máximo 256 caracteres.",
@@ -51,7 +51,6 @@ class CurriculumCreateInput(serializers.Serializer):
     )
 
     request_id = serializers.UUIDField(
-        allow_blank=False,
         allow_null=False,
         required=True,
         help_text="ID da requisição (UUID)",
@@ -64,7 +63,6 @@ class CurriculumCreateInput(serializers.Serializer):
     )
 
     user_id = serializers.UUIDField(
-        allow_blank=False,
         allow_null=False,
         required=True,
         help_text="ID do usuário (UUID)",
@@ -80,38 +78,3 @@ class CurriculumCreateInput(serializers.Serializer):
         fields = ["files", "query", "request_id", "user_id"]
 
     # TODO: Determinar o tamanho máximo para os arquivos e dimensões mínimas e máximas para as imagens
-    def validate_files(self, files):
-        """
-        Validação específica para o campo 'files'.
-        Nenhuma validação adicional é necessária, pois o campo já é validado pelo FileField.
-        """
-        return files
-
-    def validate_query(self, query_value):
-        """
-        Validação específica para o campo 'query'.
-        Nenhuma validação adicional é necessária, pois o campo já é validado pelo CharField.
-        """
-        return query_value
-
-    def validate_request_id(self, request_id_value):
-        """
-        Validação específica para o campo 'request_id'.
-        Nenhuma validação adicional é necessária, pois o campo já é validado pelo UUIDField.
-        """
-        return request_id_value
-
-    def validate_user_id(self, user_id_value):
-        """
-        Validação específica para o campo 'user_id'.
-        Nenhuma validação adicional é necessária, pois o campo já é validado pelo UUIDField.
-        """
-        return user_id_value
-
-    def validate(self, data):
-        """
-        Validação geral do serializer.
-        Nenhuma validação adicional é necessária, pois os campos já são validados pelos respectivos fields.
-        """
-
-        return data

@@ -1,4 +1,6 @@
 import easyocr
+import numpy as np
+from PIL import Image, ImageOps
 
 from apps.core.boundaries.interfaces.ocr_service import OCRService
 from apps.core.controls.ocr_exception import ReadTextException
@@ -25,29 +27,20 @@ class EasyOCRService(OCRService):
         """
         self.reader = easyocr.Reader(
             lang_list=languages,
-            gpu=True,
+            gpu=False,
         )
 
-    # TODO: IMPLEMENTAR TRATAMENTO DE IMAGENS
-    def prepare_image(self, image):
-        """
-        Prepara a imagem para o reconhecimento óptico de caracteres (OCR).
-        """
-        # Aqui você pode adicionar qualquer pré-processamento necessário na imagem
-        return image
+    def _preprocess_image(self, image_file) -> np.ndarray:
+        image_file.seek(0)
+        img = Image.open(image_file).convert("RGB")
+        gray = ImageOps.grayscale(img)
+        return np.array(gray)
 
     def recognize_text(self, image) -> str:
-        """
-        Realiza o reconhecimento óptico de caracteres (OCR) em uma lista de imagens.
-        """
-
-        result = ""
-
         try:
-            image = self.__prepare_image(image)
-
+            img_np = self._preprocess_image(image)
             model_response = self.reader.readtext(
-                image=image,
+                image=img_np,
                 batch_size=8,
                 paragraph=True,
                 blocklist=["$"],
@@ -58,12 +51,6 @@ class EasyOCRService(OCRService):
                 min_size=20,
                 link_threshold=0.2,
             )
-
-            for line in model_response:
-                result += line[1]
-                result += " "
-
-            return result
-
-        except Exception:
+            return " ".join([line[1] for line in model_response])
+        except Exception as e:
             raise ReadTextException(detail=image.name)

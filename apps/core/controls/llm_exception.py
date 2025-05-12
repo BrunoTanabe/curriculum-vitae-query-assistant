@@ -17,9 +17,7 @@ class CurriculumAnalysis(CustomAPIException):
     """
 
     def __init__(self):
-        error = {
-            "error": "Não foi possível obter a resposta da análise de currículos. Tente novamente mais tarde."
-        }
+        error = "Não foi possível obter a resposta da análise de currículos. Tente novamente mais tarde."
         code = status.HTTP_500_INTERNAL_SERVER_ERROR
 
         super().__init__(error=error, code=code)
@@ -31,9 +29,7 @@ class CurriculumSummarization(CustomAPIException):
     """
 
     def __init__(self):
-        error = {
-            "error": "Não foi possível obter a resposta do resumo de currículos. Tente novamente mais tarde."
-        }
+        error = "Não foi possível obter a resposta do resumo de currículos. Tente novamente mais tarde."
         code = status.HTTP_500_INTERNAL_SERVER_ERROR
 
         super().__init__(error=error, code=code)

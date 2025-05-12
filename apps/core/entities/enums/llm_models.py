@@ -17,7 +17,10 @@ class LLMModels(models.TextChoices):
     Esta classe define os possíveis modelos de LLM que podem ser utilizados no sistema.
     Ela utiliza as TextChoices do Django para fornecer um conjunto de opções predefinidas para um campo de modelo.
 
-    DEEPSEEKV3 (str): Representa o modelo DeepSeek V3.
+    LLAMA3_1 (str): Representa o modelo Meta Llama 3.1 8B Instruct.
     """
 
-    DEEPSEEKV3 = "deepseek-ai/DeepSeek-V3-0324", _("DeepSeek AI - DeepSeek V3 0324")
+    LLAMA3_1 = (
+        "meta-llama/Llama-3.1-8B-Instruct",
+        _("Meta Llama 3.1 8B Instruct"),
+    )

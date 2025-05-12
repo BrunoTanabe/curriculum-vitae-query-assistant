@@ -41,11 +41,3 @@ class PyPDFService(PDFService):
         text = re.sub(r"[ \t]{2,}", " ", text)
 
         return text.strip()
-
-
-if __name__ == "__main__":
-    # Teste rápido para verificar se o serviço está funcionando
-    pdf_service = PyPDFService()
-    with open("../../../data/cv_examples/cv_bruno_tanabe.pdf", "rb") as file:
-        text = pdf_service.extract_text(file)
-        print(text)

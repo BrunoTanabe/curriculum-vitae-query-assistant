@@ -36,11 +36,11 @@ class StandardResponseMiddleware:
                     response_data = json.loads(response.content)
 
                     if not (
-                            isinstance(response_data, dict)
-                            and all(
-                        key in response_data
-                        for key in ["code", "status", "response", "path", "method"]
-                    )
+                        isinstance(response_data, dict)
+                        and all(
+                            key in response_data
+                            for key in ["code", "status", "response", "path", "method"]
+                        )
                     ):
                         api_response = StandardApiResponse.error(
                             error=response_data,
@@ -53,7 +53,7 @@ class StandardResponseMiddleware:
                             api_response.to_dict(), status=response.status_code
                         )
                 except json.JSONDecodeError:
-                    error = {"detail": "Erro de formato de resposta"}
+                    error = {"error": "Erro de formato de resposta"}
 
                     api_response = StandardApiResponse.error(
                         error=error,

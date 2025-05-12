@@ -12,3 +12,10 @@ O arquivo apps.py é responsável por configurar o aplicativo curricula_vitae de
 class DocumentsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.curricula_vitae"
+
+    def ready(self):
+        from apps.curricula_vitae.containers.curriculum_container import \
+            CurriculumContainer
+
+        container = CurriculumContainer()
+        container.wire(modules=["apps.curricula_vitae.boundaries.curriculum_api_view"])

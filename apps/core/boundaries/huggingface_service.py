@@ -30,20 +30,26 @@ class HuggingFaceService(LLMService):
         )
 
     # TODO: Definir prompt para análise de currículo
-    def curricula_analysis(self, curricula: str, query) -> str:
+    def curricula_analysis(self, curricula: str, query: str) -> str:
         """
         Realiza a análise de um currículo utilizando o modelo LLM do Hugging Face.
         """
         try:
             completion = self.client.chat.completions.create(
                 model=settings.APPLICATION_LLM_MODEL,
-                temperature=1.0,
-                response_format="text",
-                messages=[{"role": "user", "content": curricula}],
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a Talent Acquisition Specialist focused on hiring candidates, primarily in the technology sector. You will be provided with multiple resumes extracted via OCR from images or photos. These texts may contain spelling, formatting, and structural inconsistencies, and the information may appear disorganized. Your task is to logically interpret and organize this content for evaluation purposes, disregarding superficial errors. Each resume will be delimited with '{$$'(start) and '$$}'(end). You will receive a set of resumes followed by one or more questions. Answer each question clearly and concisely in plain text only (no markdown), using a single paragraph. Base your answers strictly on the content provided in the resumes. Do not fabricate or assume information. If the data is insufficient to answer a question, explicitly state that. Always include a final conclusion in your response. If none of the candidates meet the requirements for the position described in the question, it is your responsibility to clearly state that as well. EVERY RESPONSE MUST CONTAIN A FINAL CONCLUSION. DO NOT RETURN ANY EXPLANATIONS OR ADDITIONAL OUTPUT. EVERY RESPONSE IN BRAZILIAN PORTUGUESE.",
+                    },
+                    {
+                        "role": "user",
+                        "content": f"De acordo com os currículos abaixo, responda: {query}\n{curricula}.",
+                    },
+                ],
             )
-
-            return completion.choices[0].message
-        except Exception:
+            return completion.choices[0].message.content
+        except Exception as e:
             raise CurriculumAnalysis()
 
     # TODO: Definir prompt para sumarização de currículo
@@ -52,13 +58,49 @@ class HuggingFaceService(LLMService):
         Realiza a sumarização de um currículo utilizando o modelo LLM do Hugging Face.
         """
         try:
+
+            response_format = {
+                "type": "json",
+                "value": {
+                    "type": "object",
+                    "properties": {},
+                    "patternProperties": {".*": {"type": "string"}},
+                    "additionalProperties": False,
+                },
+            }
+
             completion = self.client.chat.completions.create(
                 model=settings.APPLICATION_LLM_MODEL,
-                temperature=1.0,
-                response_format="json",
-                messages=[{"role": "user", "content": curricula}],
+                # TODO: configurar corretamente o response_format para forçar que a resposta seja um JSON.
+                # response_format=response_format,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a Talent Acquisition Specialist focused on recruiting in the technology sector. You will receive raw text extracted from resume images or PDFs using OCR, so expect spelling mistakes, formatting issues, and mixed-up content. These errors should be ignored. Your task is to logically organize and summarize the key information from each resume."
+                        "Each resume is marked by `{$$` at the beginning and `$$}` at the end."
+                        "Return only **one JSON object** where:"
+                        "* Each key is the **candidate's full name** (as best identified from the resume),"
+                        "* Each value is a **clear, concise summary** of the candidate's resume,"
+                        "* If there is **not enough information** to write a meaningful summary, state that clearly in the summary field, but **do not fabricate or assume** any data."
+                        "**Output format:**"
+                        "```json"
+                        "{"
+                        '   "Candidate Name 1": "Summary of resume content."'
+                        '   "Candidate Name 2": "Summary of resume content or message that data is insufficient."'
+                        "}"
+                        "```"
+                        "**Important rules:**"
+                        "* Always create a summary for each resume, even if the content is minimal."
+                        "* Never make up or assume information not clearly supported by the text."
+                        "* Only return the final JSON. Do not include explanations or additional output.",
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Essa é a lista de currículos, me retorne APENAS o json da resposta: \n{curricula}\n",
+                    },
+                ],
             )
 
-            return completion.choices[0].message
-        except Exception:
+            return completion.choices[0].message.content
+        except Exception as e:
             raise CurriculumSummarization()

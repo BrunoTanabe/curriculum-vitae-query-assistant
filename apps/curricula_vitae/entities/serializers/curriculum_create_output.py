@@ -19,40 +19,19 @@ class CurriculumCreateOutput(serializers.Serializer):
 
     ocr_model = serializers.ChoiceField(
         choices=OCRModels.choices,
-        allow_blank=False,
-        allow_null=False,
-        required=True,
-        default=OCRModels.EASYOCR,
+        read_only=True,
         help_text=f"Modelo de OCR utilizado: {', '.join(OCRModels.values)}",
-        error_messages={
-            "invalid_choice": f"O campo 'ocr_model' deve ter um dos seguintes valores: {', '.join(OCRModels.values)}.",
-            f"blank": "O campo 'ocr_model' não pode estar vazio.",
-            f"null": "O campo 'ocr_model' não pode ser nulo.",
-        },
     )
 
     llm_model = serializers.ChoiceField(
         choices=LLMModels.choices,
-        allow_blank=False,
-        allow_null=False,
-        required=True,
-        default=LLMModels.DEEPSEEKV3,
+        read_only=True,
         help_text=f"Modelo de LLM utilizado: {', '.join(LLMModels.values)}",
-        error_messages={
-            "invalid_choice": f"O campo 'llm_model' deve ter um dos seguintes valores: {', '.join(LLMModels.values)}.",
-            f"blank": "O campo 'llm_model' não pode estar vazio.",
-            f"null": "O campo 'llm_model' não pode ser nulo.",
-        },
     )
 
     llm_response = serializers.CharField(
-        allow_blank=False,
-        allow_null=False,
-        required=True,
-        default="Não foi possível enviar os dados referentes aos currículos, tente novamente mais tarde.",
-        help_text="Resposta do modelo de inteligência artificial.",
-        error_messages={
-            f"blank": "O campo 'llm_response' não pode estar vazio.",
-            f"null": "O campo 'llm_response' não pode ser nulo.",
-        },
+        read_only=True, help_text="Resposta do modelo de inteligência artificial."
     )
+
+    class Meta:
+        fields = ["ocr_model", "llm_model", "llm_response"]

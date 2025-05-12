@@ -17,9 +17,7 @@ class PostCurriculumException(CustomAPIException):
     """
 
     def __init__(self):
-        error = {
-            "error": "Não foi possível enviar os dados referentes aos currículos, tente novamente mais tarde."
-        }
+        error = "Não foi possível enviar os dados referentes aos currículos, tente novamente mais tarde."
         code = status.HTTP_500_INTERNAL_SERVER_ERROR
 
         super().__init__(error=error, code=code)

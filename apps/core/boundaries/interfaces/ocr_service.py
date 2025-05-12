@@ -23,13 +23,6 @@ class OCRService(ABC):
         self.languages = languages
 
     @abstractmethod
-    def __prepare_image(self, image):
-        """
-        Prepara a imagem para o reconhecimento óptico de caracteres (OCR).
-        """
-        pass
-
-    @abstractmethod
     def recognize_text(self, image) -> str:
         """
         Realiza o reconhecimento óptico de caracteres (OCR) em uma lista de imagens.
