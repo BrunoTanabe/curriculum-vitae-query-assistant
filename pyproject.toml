@@ -1,0 +1,48 @@
+[project]
+name = "curriculum-vitae-query-assistant"
+version = "1.0.0"
+description = "AI-powered tool that extracts and summarizes resumes (PDF, JPEG/PNG) using OCR and LLMs, answers job-fit queries, and logs all usage data (without storing documents). Built for efficient hiring workflows. Fast, auditable, and fully Dockerized with Swagger API."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "boto3>=1.37.38",
+    "d>=0.2.2",
+    "dependency-injector>=4.46.0",
+    "django>=5.2",
+    "django-cors-headers>=4.7.0",
+    "django-environ>=0.12.0",
+    "djangorestframework>=3.16.0",
+    "drf-spectacular>=0.28.0",
+    "easyocr[portuguese]>=1.7.2",
+    "huggingface-hub>=0.31.1",
+    "markdown>=3.8",
+    "mongoengine>=0.29.1",
+    "pillow>=11.2.1",
+    "psycopg2-binary>=2.9.10",
+    "pypdf2>=3.0.1",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["apps*", "config*"]
+
+# Grupos de dependências separadas por ambiente
+[project.optional-dependencies]
+development = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+]
+
+production = [
+]
+
+[tool.black]
+line-length = 92
+
+[flake8]
+exclude = "venv"
+ignore = "E501"
+
