@@ -36,7 +36,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Aplicativos nativos do Django
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -90,21 +89,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "setup.wsgi.application"
 
-env.prefix = "POSTGRESQL_"
-POSTGRES_DATABASE_NAME = env.str("DATABASE_NAME")
-POSTGRES_USERNAME = env.str("USERNAME")
-POSTGRES_PASSWORD = env.str("PASSWORD")
-POSTGRES_HOST = env.str("HOST", "localhost")
-POSTGRES_PORT = env.int("PORT", 5432)
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": POSTGRES_DATABASE_NAME,
-        "USER": POSTGRES_USERNAME,
-        "PASSWORD": POSTGRES_PASSWORD,
-        "HOST": POSTGRES_HOST,
-        "PORT": POSTGRES_PORT,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -124,21 +112,6 @@ connect(
     port=MONGODB_PORT,
     authentication_source=MONGODB_AUTHENTICATION_SOURCE,
 )
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
 
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
