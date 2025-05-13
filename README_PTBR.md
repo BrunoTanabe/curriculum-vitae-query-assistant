@@ -394,8 +394,9 @@ Caso a aplicação esteja em execução, você poderá visualizar a documentaç�
 
 ## 10. TODOs 🔮
 
-- Implementação de configuração para utilizar o modelo de OCR com a placa de vídeo (GPU) da máquina. 🖥️
-- Implementação de um modelo de OCR mais rápido que o EasyOCR, como o Tesseract OCR. 🖼️
+- Criar lógica para não estourar o limite de tokens da requisição ao LLM (Quando tiver muitos currículos) ⚙️
+- Implementação de configuração para utilizar o modelo de OCR com a placa de vídeo (GPU) da máquina 🖥️
+- Implementação de um modelo de OCR mais rápido que o EasyOCR, como o Tesseract OCR 🖼️
 - Autenticação e Autorização via JWT 🔐
 - Testes automatizados com Pytest ou unittest 🧪
 
@@ -428,7 +429,7 @@ Contribuições são muito bem-vindas! Siga os passos abaixo:
 - *Email*: [tanabebruno@gmail.com](mailto:tanabebruno@gmail.com)
 - *LinkedIn*: [linkedin.com/in/tanabebruno](https://www.linkedin.com/in/tanabebruno/)
 - *GitHub*: [github.com/brunotanabe](https://github.com/brunotanabe)
-- Medium: [medium.com/@tanabebruno](https://medium.com/@tanabebruno)
+- *Medium*: [medium.com/@tanabebruno](https://medium.com/@tanabebruno)
 
 ---
 
