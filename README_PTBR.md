@@ -2,6 +2,8 @@
 
 Otimize o processo de triagem de currículos com inteligência artificial! 🚀 O **Curriculum Vitae Query Assistant** é uma aplicação desenvolvida em Python que combina OCR e LLMs para analisar múltiplos currículos em PDF ou imagem e fornecer sumários e respostas inteligentes para perguntas específicas de recrutamento. Com uma API bem estruturada, documentação interativa via Swagger e empacotamento com Docker, essa solução foi criada para facilitar a rotina de recrutadores automatizando tarefas repetitivas e liberando tempo para decisões estratégicas.
 
+![Banner](./docs/images/banner.jpg)
+
 ---
 
 ## Sumário 📋
@@ -358,11 +360,11 @@ Caso a aplicação esteja em execução, você poderá visualizar a documentaç�
 
 ### 8.1. Documentação Interativa da API 📘
 
-![Documentação Interativa da API](images/swagger-ui-interface.png)
+![Documentação Interativa da API](docs/images/swagger-ui-interface.png)
 
 ### 8.2. Respostas da API 📄
 
-![Respostas da API](images/swagger-ui-responses.png)
+![Respostas da API](docs/images/swagger-ui-responses.png)
 
 ---
 
