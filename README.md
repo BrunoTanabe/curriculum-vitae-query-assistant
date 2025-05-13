@@ -1,27 +1,29 @@
 # Curriculum Vitae Query Assistant 📄🤖
 
-Optimize the résumé screening process with artificial intelligence! 🚀 The **Curriculum Vitae Query Assistant** is a Python-based application that combines OCR and LLMs to analyze multiple résumés in PDF or image format and provide summaries and intelligent answers to specific recruitment questions. With a well-structured API, interactive documentation via Swagger, and Docker packaging, this solution was created to streamline recruiters’ workflows by automating repetitive tasks and freeing up time for strategic decision-making.
+Optimize the resume screening process with artificial intelligence! 🚀 The **Curriculum Vitae Query Assistant** is a Python-based application that combines OCR and LLMs to analyze multiple résumés in PDF or image format and provide summaries and intelligent answers to specific recruitment questions. With a well-structured API, interactive documentation via Swagger, and Docker packaging, this solution was created to streamline recruiters’ workflows by automating repetitive tasks and freeing up time for strategic decision-making.
+
+![Banner](./docs/images/banner.jpg)
 
 ---
 
 ## Summary 📋
 
-[Curriculum Vitae Query Assistant 📄🤖](#curriculum-vitae-query-assistant-)
-[Summary 📋](#summary-)
-[1. Description 📖](#1-description-)
-[2. Objectives 🎯](#2-objectives-)
-[3. Key Features ⚙️](#3-key-features-️)
-[4. Main Technologies Used 💻](#4-main-technologies-used-)
-[5. Dependency Structure 📁](#5-dependency-structure-)
-[6. Requirements 🔧](#6-requirements-)
-[7. How to Run? 🏃‍♂️](#7-how-to-run-️)
-[8. Application Screenshots 🖼](#8-application-screenshots-)
-[9. Available Endpoints 🚀](#9-available-endpoints-)
-[10. TODOs 🔮](#10-todos-)
-[11. License 📄](#11-license-)
-[12. How to Contribute? 🤝](#12-how-to-contribute-)
-[13. Author and Contact 👤](#13-author-and-contact-)
-[14. Special Thanks 🌟](#14-special-thanks-)
+[Curriculum Vitae Query Assistant 📄🤖](#curriculum-vitae-query-assistant-)  
+[Summary 📋](#summary-)  
+[1. Description 📖](#1-description-)  
+[2. Objectives 🎯](#2-objectives-)  
+[3. Key Features ⚙️](#3-key-features-️)  
+[4. Main Technologies Used 💻](#4-main-technologies-used-)  
+[5. Dependency Structure 📁](#5-dependency-structure-)  
+[6. Requirements 🔧](#6-requirements-)  
+[7. How to Run? 🏃‍♂️](#7-how-to-run-️)  
+[8. Application Screenshots 🖼](#8-application-screenshots-)  
+[9. Available Endpoints 🚀](#9-available-endpoints-)  
+[10. TODOs 🔮](#10-todos-)  
+[11. License 📄](#11-license-)  
+[12. How to Contribute? 🤝](#12-how-to-contribute-)  
+[13. Author and Contact 👤](#13-author-and-contact-)  
+[14. Special Thanks 🌟](#14-special-thanks-)  
 
 ---
 
@@ -357,11 +359,11 @@ If the application is running, you can view the API documentation and test the e
 
 ### 8.1. Interactive API Documentation 📘
 
-![Interactive API Documentation](images/swagger-ui-interface.png)
+![Interactive API Documentation](docs/images/swagger-ui-interface.png)
 
 ### 8.2. API Responses 📄
 
-![API Responses](images/swagger-ui-responses.png)
+![API Responses](docs/images/swagger-ui-responses.png)
 
 ---
 
