@@ -394,9 +394,9 @@ Caso a aplicação esteja em execução, você poderá visualizar a documentaç�
 
 ## 10. TODOs 🔮
 
-- Criar lógica para não estourar o limite de tokens da requisição ao LLM (Quando tiver muitos currículos). ⚙️
-- Implementação de configuração para utilizar o modelo de OCR com a placa de vídeo (GPU) da máquina. 🖥️
-- Implementação de um modelo de OCR mais rápido que o EasyOCR, como o Tesseract OCR. 🖼️
+- Criar lógica para não estourar o limite de tokens da requisição ao LLM (Quando tiver muitos currículos) ⚙️
+- Implementação de configuração para utilizar o modelo de OCR com a placa de vídeo (GPU) da máquina 🖥️
+- Implementação de um modelo de OCR mais rápido que o EasyOCR, como o Tesseract OCR 🖼️
 - Autenticação e Autorização via JWT 🔐
 - Testes automatizados com Pytest ou unittest 🧪
 
