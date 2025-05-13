@@ -393,6 +393,7 @@ If the application is running, you can view the API documentation and test the e
 
 ## 10. TODOs 🔮
 
+* Create logic to not exceed the token limit of the LLM request (When there are many resumes). ⚙️
 * Implement configuration to use the machine’s GPU for the OCR model. 🖥️
 * Implement a faster OCR model than EasyOCR, such as Tesseract OCR. 🖼️
 * Authentication and Authorization via JWT 🔐
@@ -427,7 +428,7 @@ Contributions are very welcome! Follow the steps below:
 * *Email*: [tanabebruno@gmail.com](mailto:tanabebruno@gmail.com)
 * *LinkedIn*: [linkedin.com/in/tanabebruno](https://www.linkedin.com/in/tanabebruno/)
 * *GitHub*: [github.com/brunotanabe](https://github.com/brunotanabe)
-* Medium: [medium.com/@tanabebruno](https://medium.com/@tanabebruno)
+* *Medium*: [medium.com/@tanabebruno](https://medium.com/@tanabebruno)
 
 ---
 
